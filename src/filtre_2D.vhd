@@ -70,7 +70,7 @@ begin
 
     elsif rising_edge(clk) then
 
-      -- détection de la fin de fenetre_valide
+      -- dÃ©tection de la fin de fenetre_valide
       if (fen_prev = '1' and fenetre_valide = '0') then
         flush_cnt <= 3;                 -- 3 cycles pour vider le pipeline
       elsif flush_cnt > 0 then
@@ -88,7 +88,7 @@ begin
       t21 <= t11 + t12;
       t22 <= t13 + t14;
 
-      -- sortie autorisée pendant fenetre_valide OU vidage
+      -- sortie autorisÃ©e pendant fenetre_valide OU vidage
       if (fenetre_valide = '1' or flush_cnt > 0) then
         t31 <= (t21 + t22)/16;
         pixel_sortie <= std_logic_vector(to_unsigned(t31, 8));
