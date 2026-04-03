@@ -33,8 +33,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 ----------------------------------------------------------------------------------
 -- Module Name: tb_filtre_flou_lena - Behavioral
--- Description: Testbench complet mémoire cache + filtre flou
---              Lit Lena, applique le flou, écrit l'image floutée
+-- Description: Testbench complet mÃ©moire cache + filtre flou
+--              Lit Lena, applique le flou, Ã©crit l'image floutÃ©e
 ----------------------------------------------------------------------------------
 
 library IEEE;
