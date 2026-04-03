@@ -35,7 +35,7 @@ use ieee.numeric_std.all;
 ----------------------------------------------------------------------------------
 -- Module Name: filtre_flou - Behavioral
 -- Description: Filtre flou calculant la moyenne des 8 pixels voisins
---              Utilise une machine à états pour effectuer les additions
+--              Utilise une machine Ã  Ã©tats pour effectuer les additions
 ----------------------------------------------------------------------------------
 
 entity filtre_flou is
