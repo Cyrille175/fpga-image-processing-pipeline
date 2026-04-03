@@ -72,7 +72,7 @@ architecture Behavioral of tb_memoire_cache_lena is
 
 begin
 
-  -- Instanciation de la mémoire cache
+  -- Instanciation de la mÃ©moire cache
   memoire: memoire_cache
     generic map(
       LARGEUR_IMAGE => LARGEUR_IMAGE,
@@ -95,7 +95,7 @@ begin
       fenetre_valide => fenetre_valide
     );
 
-  -- Génération de l'horloge (période 10 ns)
+  -- GÃ©nÃ©ration de l'horloge (pÃ©riode 10 ns)
   clk <= not clk after 5 ns;
 
   -- Processus de reset
@@ -145,7 +145,7 @@ begin
   
   
 
-  -- Processus d'écriture des résultats
+  -- Processus d'Ã©criture des rÃ©sultats
   p_write: process
     file results : text;
     variable OLine : line;
@@ -158,16 +158,16 @@ begin
     -- Ouverture du fichier de sortie
     file_open(results, "Lena128x128g_8bits_matrice.dat", write_mode);
     
-    -- Attente de la première fenêtre valide
+    -- Attente de la premiÃ¨re fenÃªtre valide
     wait until fenetre_valide = '1';
     
-    -- Écriture des fenêtres 3x3
+    -- Ã‰criture des fenÃªtres 3x3
  
     while pixel_valide = '1' or fenetre_valide = '1' loop
       wait until rising_edge(clk);
       
       if fenetre_valide = '1' then
-        -- Écriture de la fenêtre 3x3 complète
+        -- Ã‰criture de la fenÃªtre 3x3 complÃ¨te
         write(OLine, string'("Fenetre ")); --j'ecris Fenetre au debut de chaque fenetre
         write(OLine, compteur);
         write(OLine, string'(":"));
