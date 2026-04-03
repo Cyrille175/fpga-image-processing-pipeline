@@ -80,21 +80,21 @@ architecture rtl of memoire_cache is
     );
   end component;
 
-  -- Machine à états pour le contrôle des FIFOs
+  -- Machine Ã  Ã©tats pour le contrÃ´le des FIFOs
   type etat_type is (INIT, LIGNE1, ATTENTE_FIFO1, LIGNE2, ATTENTE_FIFO2,VALIDATION_FENETRE);
   signal etat_present, etat_futur : etat_type;
   
   -- Compteur de pixels
   signal compteur_pixel : integer range 0 to LARGEUR_IMAGE*HAUTEUR_IMAGE;
   
-  -- Signaux de contrôle
+  -- Signaux de contrÃ´le
   constant prog_full_thresh_int : integer := LARGEUR_IMAGE - 5;
   signal prog_full_thresh : std_logic_vector(9 downto 0);
   
   signal wr_en_fifo1, wr_en_fifo2 : std_logic := '0';
   signal en_milieu, en_haut : std_logic := '0';
   
-  -- Signaux de données
+  -- Signaux de donnÃ©es
   signal ligne_actuelle, ligne_moins1, ligne_moins2 : std_logic_vector(7 downto 0);
   signal bas_gauche, bas_milieu, bas_droite : std_logic_vector(7 downto 0);
   signal milieu_gauche, milieu_milieu, milieu_droite : std_logic_vector(7 downto 0);
@@ -124,7 +124,7 @@ begin
       dout3 => bas_gauche
     );
   
-  -- FIFO 1 (stocke une ligne complète)
+  -- FIFO 1 (stocke une ligne complÃ¨te)
   u_fifo1 : fifo_generator_1
     port map(
       clk   => clk,
@@ -153,7 +153,7 @@ begin
       dout3 => milieu_gauche
     );
 
-  -- FIFO 2 (stocke une deuxième ligne complète)
+  -- FIFO 2 (stocke une deuxiÃ¨me ligne complÃ¨te)
   u_fifo2 : fifo_generator_1
     port map(
       clk   => clk,
@@ -182,7 +182,7 @@ begin
       dout3 => haut_gauche
     );
 
-  -- Affectation des sorties (fenêtre 3x3)
+  -- Affectation des sorties (fenÃªtre 3x3)
   p00 <= haut_gauche;    p01 <= haut_milieu;    p02 <= haut_droite;
   p10 <= milieu_gauche;  p11 <= milieu_milieu;  p12 <= milieu_droite;
   p20 <= bas_gauche;     p21 <= bas_milieu;     p22 <= bas_droite;
@@ -190,7 +190,7 @@ begin
   fenetre_valide <= fenetre_valide_interne;
   
 
-  -- Machine à états : Processus séquentiel
+  -- Machine Ã  Ã©tats : Processus sÃ©quentiel
   process(clk, rst)
   begin
     if rst = '1' then
@@ -216,7 +216,7 @@ begin
         end if;
       
       when LIGNE1 =>
-        -- Remplissage de la première ligne
+        -- Remplissage de la premiÃ¨re ligne
         -- Attendre 3 cycles que le premier pixel atteigne bas_gauche
         if compteur_pixel > 2 then
           wr_en_fifo1 <= '1';
@@ -234,7 +234,7 @@ begin
         end if;
       
       when LIGNE2 =>
-        -- Remplissage de la deuxième ligne
+        -- Remplissage de la deuxiÃ¨me ligne
         if compteur_pixel >= LARGEUR_IMAGE + 3 then
         wr_en_fifo2 <= '1';
         end if;
