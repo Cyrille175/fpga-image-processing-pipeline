@@ -105,7 +105,7 @@ begin
 
     rst <= '0';
 
-    -- attendre que l'IP soit prête
+    -- attendre que l'IP soit prÃªte
     wait until rising_edge(clk);
     while (wr_rst_busy = '1' or rd_rst_busy = '1') loop
       wait until rising_edge(clk);
@@ -126,7 +126,7 @@ begin
       end if;
     end loop;
 
-    -- stop écriture
+    -- stop Ã©criture
     wait until rising_edge(clk);
     wr_en <= '0';
     din <= x"00";
@@ -151,16 +151,16 @@ begin
 
     -- =========================
     -- 4) LECTURE + ECRITURE EN MEME TEMPS
-    --    écrire 20 -> 35 tout en lisant
+    --    Ã©crire 20 -> 35 tout en lisant
     -- =========================
     for i in 20 to 35 loop
       wait until rising_edge(clk);
 
-      -- par défaut
+      -- par dÃ©faut
       wr_en <= '0';
       rd_en <= '0';
 
-      -- écrire si possible
+      -- Ã©crire si possible
       din <= std_logic_vector(to_unsigned(i, 8));
       if full = '0' then
         wr_en <= '1';
@@ -172,13 +172,13 @@ begin
       end if;
     end loop;
 
-    -- stop écriture
+    -- stop Ã©criture
     wait until rising_edge(clk);
     wr_en <= '0';
     din <= x"00";
 
     -- =========================
-    -- 5) VIDER LA FIFO (lecture jusqu'à empty)
+    -- 5) VIDER LA FIFO (lecture jusqu'Ã  empty)
     -- =========================
     while empty = '0' loop
       wait until rising_edge(clk);
@@ -196,7 +196,7 @@ begin
     rd_en <= '0';
 
     -- =========================
-    -- 6) REDEMARRAGE : réécrire quelques valeurs puis relire
+    -- 6) REDEMARRAGE : rÃ©Ã©crire quelques valeurs puis relire
     -- =========================
     for i in 50 to 55 loop
       wait until rising_edge(clk);
